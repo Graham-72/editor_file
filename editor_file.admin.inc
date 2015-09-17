@@ -23,7 +23,7 @@ function editor_file_upload_settings_form(Editor $editor) {
   // Defaults.
   $file_upload = $editor->getThirdPartySettings('editor_file');
   $file_upload += [
-    'status' => FALSE,
+    'status' => TRUE,
     'scheme' => file_default_scheme(),
     'directory' => 'inline-files',
     'extensions' => 'txt',
