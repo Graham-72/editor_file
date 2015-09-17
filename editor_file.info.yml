@@ -1,0 +1,10 @@
+name: 'D8 Editor file upload'
+type: module
+description: 'Allow users to link uploaded files in the text Editor.'
+core: 8.x
+dependencies:
+  - ckeditor
+  - editor
+  - filter
+  - file
+configure: filter.admin_overview
