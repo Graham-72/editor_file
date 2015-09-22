@@ -131,17 +131,12 @@
       // CTRL + K.
       editor.setKeystroke(CKEDITOR.CTRL + 75, 'drupalfile');
 
-      // Add buttons for file and unfile.
+      // Add buttons for file upload.
       if (editor.ui.addButton) {
         editor.ui.addButton('DrupalFile', {
           label: Drupal.t('File'),
           command: 'drupalfile',
           icon: this.path + '/file.png'
-        });
-        editor.ui.addButton('DrupalUnfile', {
-          label: Drupal.t('Unfile'),
-          command: 'drupalunfile',
-          icon: this.path + '/unfile.png'
         });
       }
 
@@ -164,13 +159,6 @@
             command: 'drupalfile',
             group: 'file',
             order: 1
-          },
-
-          unfile: {
-            label: Drupal.t('Unfile'),
-            command: 'drupalunfile',
-            group: 'file',
-            order: 5
           }
         });
       }
