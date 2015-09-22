@@ -17,7 +17,7 @@ use Drupal\editor\Entity\Editor;
  *
  * @CKEditorPlugin(
  *   id = "drupalfile",
- *   label = @Translation("Drupal file"),
+ *   label = @Translation("File upload"),
  *   module = "ckeditor"
  * )
  */
