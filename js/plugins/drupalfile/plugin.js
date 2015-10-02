@@ -13,7 +13,7 @@
     init: function (editor) {
       // Add the commands for file and unfile.
       editor.addCommand('drupalfile', {
-        allowedContent: 'a[!href,target,!data-entity-type,!data-entity-uuid]',
+        allowedContent: 'a[!href,target,title,!data-entity-type,!data-entity-uuid]',
         requiredContent: 'a[href,data-entity-type,data-entity-uuid]',
         modes: {wysiwyg: 1},
         canUndo: true,
