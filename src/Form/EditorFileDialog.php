@@ -82,11 +82,6 @@ class EditorFileDialog extends FormBase {
       $file_element = $form_state->get('file_element') ?: [];
     }
 
-    // The default values are set directly from \Drupal::request()->request,
-    // provided by the editor plugin opening the dialog.
-    $user_input = $form_state->getUserInput();
-    $input = isset($user_input['editor_object']) ? $user_input['editor_object'] : array();
-
     $form['#tree'] = TRUE;
     $form['#attached']['library'][] = 'editor/drupal.editor.dialog';
     $form['#prefix'] = '<div id="editor-file-dialog-form">';
