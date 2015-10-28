@@ -126,20 +126,28 @@ class EditorFileDialog extends FormBase {
     }
 
     // Everything under the "attributes" key is merged directly into the
-    // generated file tag's attributes.
-    $form['attributes']['title'] = [
-      '#type' => 'textfield',
-      '#title' => t('Title'),
-      '#default_value' => $file_element['title'] ?: '',
-      '#maxlength' => 512,
-    ];
+    // generated link tag's attributes.
 
-    $form['attributes']['target'] = array(
-      '#title' => $this->t('Open in new window'),
-      '#type' => 'checkbox',
-      '#default_value' => !empty($file_element['target']),
-      '#return_value' => '_blank',
-    );
+    // Get filter html restrictions to avoid showing a field that cannot be used
+    $restrictions = $filter_format->getHtmlRestrictions();
+
+    if ($restrictions === FALSE || $restrictions['allowed']['a'] === TRUE || $restrictions['allowed']['a']['title'] === TRUE) {
+      $form['attributes']['title'] = [
+        '#type' => 'textfield',
+        '#title' => t('Title'),
+        '#default_value' => $file_element['title'] ?: '',
+        '#maxlength' => 512,
+      ];
+    }
+
+    if ($restrictions === FALSE || $restrictions['allowed']['a'] === TRUE || $restrictions['allowed']['a']['target'] === TRUE) {
+      $form['attributes']['target'] = array(
+        '#title' => $this->t('Open in new window'),
+        '#type' => 'checkbox',
+        '#default_value' => !empty($file_element['target']),
+        '#return_value' => '_blank',
+      );
+    }
 
     $form['actions'] = array(
       '#type' => 'actions',
