@@ -69,10 +69,15 @@
               var selection = editor.getSelection();
               var range = selection.getRanges(1)[0];
 
-              // Use file URL as text with a collapsed cursor.
+              // Use the link title or the file name as text with a collapsed
+              // cursor.
               if (range.collapsed) {
-                // Shorten mailto URLs to just the email address.
-                var text = new CKEDITOR.dom.text(returnValues.attributes.href.replace(/^mailto:/, ''), editor.document);
+                var text = returnValues.attributes.title;
+                if (!text.length) {
+                  text = returnValues.attributes.href;
+                  text = text.substr(text.lastIndexOf('/') + 1);
+                }
+                text = new CKEDITOR.dom.text(text, editor.document);
                 range.insertNode(text);
                 range.selectNodeContents(text);
               }
