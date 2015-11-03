@@ -13,16 +13,18 @@
     init: function (editor) {
       // Add the commands for file and unfile.
       editor.addCommand('drupalfile', {
-        allowedContent: new CKEDITOR.style({
-          element: 'a',
-          attributes: {
-            '!href': '',
-            'target': '',
-            'title': '',
-            '!data-entity-type': '',
-            '!data-entity-uuid': ''
+        allowedContent: {
+          a: {
+            attributes: {
+              '!href': true,
+              'target': true,
+              'title': true,
+              '!data-entity-type': true,
+              '!data-entity-uuid': true
+            },
+            classes: {}
           }
-        }),
+        },
         requiredContent: new CKEDITOR.style({
           element: 'a',
           attributes: {
