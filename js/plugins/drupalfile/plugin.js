@@ -17,8 +17,6 @@
           a: {
             attributes: {
               '!href': true,
-              'target': true,
-              'title': true,
               '!data-entity-type': true,
               '!data-entity-uuid': true
             },
@@ -74,19 +72,17 @@
               // Use the link title or the file name as text with a collapsed
               // cursor.
               if (range.collapsed) {
-                var text = returnValues.attributes.title;
-                if (!text.length) {
+                var text;
+                if (returnValues.attributes.title && returnValues.attributes.title.length) {
+                  text = returnValues.attributes.title;
+                }
+                else {
                   text = returnValues.attributes.href;
                   text = text.substr(text.lastIndexOf('/') + 1);
                 }
                 text = new CKEDITOR.dom.text(text, editor.document);
                 range.insertNode(text);
                 range.selectNodeContents(text);
-              }
-
-              // Ignore a disabled target attribute.
-              if (returnValues.attributes.target === 0) {
-                delete returnValues.attributes.target;
               }
 
               // Create the new file by applying a style to the new text.

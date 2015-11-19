@@ -9,6 +9,7 @@ namespace Drupal\editor_file\Form;
 
 use Drupal\Component\Utility\Bytes;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Form\BaseFormIdInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\filter\Entity\FilterFormat;
@@ -21,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * Provides a link dialog for text editors.
  */
-class EditorFileDialog extends FormBase {
+class EditorFileDialog extends FormBase implements BaseFormIdInterface {
 
   /**
    * The file storage service.
@@ -55,6 +56,14 @@ class EditorFileDialog extends FormBase {
    */
   public function getFormId() {
     return 'editor_file_dialog';
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getBaseFormId() {
+    // Use the EditorLinkDialog form id to ease alteration.
+    return 'editor_link_dialog';
   }
 
   /**
@@ -123,30 +132,6 @@ class EditorFileDialog extends FormBase {
     else {
       $form['fid']['#access'] = FALSE;
       $form['fid']['#required'] = FALSE;
-    }
-
-    // Everything under the "attributes" key is merged directly into the
-    // generated link tag's attributes.
-
-    // Get filter html restrictions to avoid showing a field that cannot be used
-    $restrictions = $filter_format->getHtmlRestrictions();
-
-    if ($restrictions === FALSE || $restrictions['allowed']['a'] === TRUE || $restrictions['allowed']['a']['title'] === TRUE) {
-      $form['attributes']['title'] = [
-        '#type' => 'textfield',
-        '#title' => t('Title'),
-        '#default_value' => $file_element['title'] ?: '',
-        '#maxlength' => 512,
-      ];
-    }
-
-    if ($restrictions === FALSE || $restrictions['allowed']['a'] === TRUE || $restrictions['allowed']['a']['target'] === TRUE) {
-      $form['attributes']['target'] = array(
-        '#title' => $this->t('Open in new window'),
-        '#type' => 'checkbox',
-        '#default_value' => !empty($file_element['target']),
-        '#return_value' => '_blank',
-      );
     }
 
     $form['actions'] = array(
