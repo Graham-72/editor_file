@@ -145,25 +145,6 @@
           Drupal.ckeditor.openDialog(editor, Drupal.url('editor_file/dialog/file/' + editor.config.drupal.format), existingValues, saveCallback, dialogSettings);
         }
       });
-      editor.addCommand('drupalunfile', {
-        contextSensitive: 1,
-        startDisabled: 1,
-        allowedContent: 'a[!href]',
-        requiredContent: 'a[href]',
-        exec: function (editor) {
-          var style = new CKEDITOR.style({element: 'a', type: CKEDITOR.STYLE_INLINE, alwaysRemoveElement: 1});
-          editor.removeStyle(style);
-        },
-        refresh: function (editor, path) {
-          var element = path.lastElement && path.lastElement.getAscendant('a', true);
-          if (element && element.getName() === 'a' && element.getAttribute('href') && element.getChildCount()) {
-            this.setState(CKEDITOR.TRISTATE_OFF);
-          }
-          else {
-            this.setState(CKEDITOR.TRISTATE_DISABLED);
-          }
-        }
-      });
 
       // CTRL + K.
       editor.setKeystroke(CKEDITOR.CTRL + 75, 'drupalfile');
@@ -213,7 +194,7 @@
 
           var menu = {};
           if (anchor.getAttribute('href') && anchor.getChildCount()) {
-            menu = {file: CKEDITOR.TRISTATE_OFF, unfile: CKEDITOR.TRISTATE_OFF};
+            menu = {file: CKEDITOR.TRISTATE_OFF};
           }
           return menu;
         });
