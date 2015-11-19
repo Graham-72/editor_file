@@ -146,9 +146,6 @@
         }
       });
 
-      // CTRL + K.
-      editor.setKeystroke(CKEDITOR.CTRL + 75, 'drupalfile');
-
       // Add buttons for file upload.
       if (editor.ui.addButton) {
         editor.ui.addButton('DrupalFile', {
