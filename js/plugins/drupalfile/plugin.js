@@ -172,7 +172,7 @@
           file: {
             label: Drupal.t('Edit File'),
             command: 'drupalfile',
-            group: 'file',
+            group: 'link',
             order: 1
           }
         });
