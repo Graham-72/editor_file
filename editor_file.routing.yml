@@ -3,5 +3,7 @@ editor_file.file_dialog:
   defaults:
     _form: '\Drupal\editor_file\Form\EditorFileDialog'
     _title: 'Add file'
+  options:
+    _theme: ajax_base_page
   requirements:
     _entity_access: 'filter_format.use'
