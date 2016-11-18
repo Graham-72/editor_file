@@ -102,7 +102,7 @@ class EditorFileDialog extends FormBase implements BaseFormIdInterface {
     $file_upload = $editor->getThirdPartySettings('editor_file');
     $max_filesize = min(Bytes::toInt($file_upload['max_size']), file_upload_max_size());
 
-    $existing_file = isset($file_element['data-entity-uuid']) ? \Drupal::entityManager()->loadEntityByUuid('file', $file_element['data-entity-uuid']) : NULL;
+    $existing_file = isset($file_element['data-entity-uuid']) ? \Drupal::entityTypeManager()->loadEntityByUuid('file', $file_element['data-entity-uuid']) : NULL;
     $fid = $existing_file ? $existing_file->id() : NULL;
 
     $form['fid'] = array(
