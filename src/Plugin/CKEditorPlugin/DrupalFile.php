@@ -86,7 +86,7 @@ class DrupalFile extends CKEditorPluginBase implements CKEditorPluginConfigurabl
    * @see editor_file_upload_settings_form()
    */
   function validateFileUploadSettings(array $element, FormStateInterface $form_state) {
-    $settings = &$form_state->getValue(array('editor', 'settings', 'plugins', 'drupalfile', 'file_upload'));
+    $settings = &$form_state->getValue($element['#parents']);
     $editor = $form_state->get('editor');
     foreach ($settings as $key => $value) {
       if (!empty($value)) {
@@ -96,7 +96,7 @@ class DrupalFile extends CKEditorPluginBase implements CKEditorPluginConfigurabl
         $editor->unsetThirdPartySetting('editor_file', $key);
       }
     }
-    $form_state->unsetValue(array('editor', 'settings', 'plugins', 'drupalfile'));
+    $form_state->unsetValue(array_slice($element['#parents'], 0, -1));
   }
 
 }
