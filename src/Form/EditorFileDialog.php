@@ -112,7 +112,7 @@ class EditorFileDialog extends FormBase implements BaseFormIdInterface {
     // Load dialog settings.
     $editor = editor_load($filter_format->id());
     $file_upload = $editor->getThirdPartySettings('editor_file');
-    $max_filesize = min(Bytes::toInt($file_upload['max_size']), file_upload_max_size());
+    $max_filesize = isset($file_upload['max_size']) ? min(Bytes::toInt($file_upload['max_size']), file_upload_max_size()) : file_upload_max_size();
 
     $existing_file = isset($file_element['data-entity-uuid']) ? $this->entityRepository->loadEntityByUuid('file', $file_element['data-entity-uuid']) : NULL;
     $fid = $existing_file ? $existing_file->id() : NULL;
