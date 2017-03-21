@@ -169,6 +169,17 @@ class EditorFileDialog extends FormBase implements BaseFormIdInterface {
       $form_state->setValue(array('attributes', 'href'), $file_url);
       $form_state->setValue(array('attributes', 'data-entity-uuid'), $file->uuid());
       $form_state->setValue(array('attributes', 'data-entity-type'), 'file');
+
+      $mime_type = $file->getMimeType();
+      // Classes to add to the file field for icons.
+      $classes = array(
+        'file',
+        // Add a specific class for each and every mime type.
+        'file--mime-' . strtr($mime_type, array('/' => '-', '.' => '-')),
+        // Add a more general class for groups of well known MIME types.
+        'file--' . file_icon_class($mime_type),
+      );
+      $form_state->setValue(array('attributes', 'class'), implode(' ', $classes));
     }
 
     if ($form_state->getErrors()) {
